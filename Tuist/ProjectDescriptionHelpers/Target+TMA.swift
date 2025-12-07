@@ -2,7 +2,8 @@ import ProjectDescription
 
 public extension Target {
     static func source(name: String, product: Product, internalDependencies: [TMATarget] = [], externalDependencies: [TargetDependency] = []) -> Target {
-        .target(
+        let target = TMATarget.source.rawValue
+        return .target(
             name: name,
             destinations: .iOS,
             product: product,
@@ -10,7 +11,7 @@ public extension Target {
             deploymentTargets: Default.deploymentTarget,
             infoPlist: .default,
             buildableFolders: [
-                "Source",
+                .init(stringLiteral: target),
             ],
             dependencies: internalDependencies.converted(with: name) + externalDependencies,
             settings: Default.settings(),
@@ -18,15 +19,16 @@ public extension Target {
     }
     
     static func interface(name: String, product: Product) -> Target {
-        .target(
-            name: "\(name)Interface",
+        let target = TMATarget.interface.rawValue
+        return .target(
+            name: "\(name)\(target)",
             destinations: .iOS,
             product: product,
-            bundleId: "\(Default.team).\(name)Interface",
+            bundleId: "\(Default.team).\(name)\(target)",
             deploymentTargets: Default.deploymentTarget,
             infoPlist: .default,
             buildableFolders: [
-                "Interface",
+                .init(stringLiteral: target),
             ],
             dependencies: [],
             settings: Default.settings(),
@@ -34,15 +36,16 @@ public extension Target {
     }
     
     static func tests(name: String, internalDependencies: [TMATarget], externalDependencies: [TargetDependency] = []) -> Target {
-        .target(
-            name: "\(name)Tests",
+        let target = TMATarget.tests.rawValue
+        return .target(
+            name: "\(name)\(target)",
             destinations: .iOS,
             product: .unitTests,
-            bundleId: "\(Default.team).\(name)Tests",
+            bundleId: "\(Default.team).\(name)\(target)",
             deploymentTargets: Default.deploymentTarget,
             infoPlist: .default,
             buildableFolders: [
-                "Tests",
+                .init(stringLiteral: target),
             ],
             dependencies: internalDependencies.converted(with: name) + externalDependencies,
             settings: Default.settings(),
@@ -50,15 +53,16 @@ public extension Target {
     }
     
     static func testing(name: String, product: Product, internalDependencies: [TMATarget], externalDependencies: [TargetDependency] = []) -> Target {
-        .target(
-            name: "\(name)Testing",
+        let target = TMATarget.testing.rawValue
+        return .target(
+            name: "\(name)\(target)",
             destinations: .iOS,
             product: product,
-            bundleId: "\(Default.team).\(name)Testing",
+            bundleId: "\(Default.team).\(name)\(target)",
             deploymentTargets: Default.deploymentTarget,
             infoPlist: .default,
             buildableFolders: [
-                "Testing",
+                .init(stringLiteral: target),
             ],
             dependencies: internalDependencies.converted(with: name) + externalDependencies,
             settings: Default.settings(),
@@ -66,41 +70,21 @@ public extension Target {
     }
     
     static func example(name: String, internalDependencies: [TMATarget], externalDependencies: [TargetDependency] = []) -> Target {
-        .target(
-            name: "\(name)Example",
+        let target = TMATarget.example.rawValue
+        return .target(
+            name: "\(name)\(target)",
             destinations: [
                 .iPhone,
             ],
             product: .app,
-            bundleId: "\(Default.team).\(name)Example",
+            bundleId: "\(Default.team).\(name)\(target)",
             deploymentTargets: Default.deploymentTarget,
             infoPlist: .extendingDefault(with: Default.infoPlist()),
             buildableFolders: [
-                "Example",
+                .init(stringLiteral: target),
             ],
             dependencies: internalDependencies.converted(with: name) + externalDependencies,
             settings: Default.settings(),
         )
-    }
-}
-
-public enum TMATarget: String {
-    case Source
-    case Interface
-    case Tests
-    case Testing
-    case Example
-    
-    var suffix: String {
-        switch self {
-        case .Source: ""
-        default: self.rawValue
-        }
-    }
-}
-
-private extension [TMATarget] {
-    func converted(with name: String) -> [TargetDependency] {
-        self.map { .target(name: "\(name)\($0.suffix)") }
     }
 }

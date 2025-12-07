@@ -1,7 +1,7 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let name = "ChatFeature"
+let name = Modules.ChatFeature.rawValue
 
 let project = Project(
     name: name,
@@ -10,17 +10,11 @@ let project = Project(
             name: name,
             product: .staticLibrary,
             internalDependencies: [
-                .Interface,
+                .interface,
             ],
             externalDependencies: [
-                .project(
-                    target: "DesignSystem",
-                    path: .relativeToRoot("Core/DesignSystem"),
-                ),
-                .project(
-                    target: "LanguageModelClientInterface",
-                    path: .relativeToRoot("Core/LanguageModelClient"),
-                ),
+                Modules.DesignSystem.project(target: .source),
+                Modules.LanguageModelClient.project(target: .interface),
             ],
         ),
         .interface(
@@ -30,40 +24,31 @@ let project = Project(
         .tests(
             name: name,
             internalDependencies: [
-                .Source,
-                .Testing,
+                .source,
+                .testing,
             ],
             externalDependencies: [
-                .project(
-                    target: "LanguageModelClientTesting",
-                    path: .relativeToRoot("Core/LanguageModelClient"),
-                ),
+                Modules.LanguageModelClient.project(target: .testing),
             ],
         ),
         .testing(
             name: name,
             product: .staticLibrary,
             internalDependencies: [
-                .Interface,
+                .interface,
             ],
             externalDependencies: [
-                .project(
-                    target: "LanguageModelClientInterface",
-                    path: .relativeToRoot("Core/LanguageModelClient"),
-                ),
+                Modules.LanguageModelClient.project(target: .interface),
             ],
         ),
         .example(
             name: name,
             internalDependencies: [
-                .Source,
-                .Testing,
+                .source,
+                .testing,
             ],
             externalDependencies: [
-                .project(
-                    target: "LanguageModelClientTesting",
-                    path: .relativeToRoot("Core/LanguageModelClient"),
-                ),
+                Modules.LanguageModelClient.project(target: .testing),
             ],
         ),
     ],

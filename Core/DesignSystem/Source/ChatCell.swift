@@ -11,9 +11,9 @@ public struct ChatCell: View {
                 Spacer(minLength: 100)
                 Text(self.prompt)
                     .padding()
+                    .background(Color.defaultBackground)
+                    .foregroundStyle(Color.defaultText)
                     .font(.system(size: 15, weight: .bold))
-                    .background(DesignSystemAsset.defaultBackground.swiftUIColor)
-                    .foregroundStyle(DesignSystemAsset.defaultText.swiftUIColor)
                     .cornerRadius(15)
             }
             Markdown(self.response)

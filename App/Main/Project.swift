@@ -19,14 +19,8 @@ let project = Project(
                 "Source",
             ],
             dependencies: [
-                .project(
-                    target: "ChatFeature",
-                    path: .relativeToRoot("Feature/ChatFeature"),
-                ),
-                .project(
-                    target: "LanguageModelClient",
-                    path: .relativeToRoot("Core/LanguageModelClient"),
-                ),
+                Modules.ChatFeature.project(target: .source),
+                Modules.LanguageModelClient.project(target: .source),
             ],
             settings: Default.settings(),
         ),

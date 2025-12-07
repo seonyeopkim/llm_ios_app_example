@@ -1,7 +1,7 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let name = "DesignSystem"
+let name = Modules.DesignSystem.rawValue
 
 let project = Project(
     name: name,
@@ -10,23 +10,17 @@ let project = Project(
             name: name,
             product: .framework,
             externalDependencies: [
-                .project(
-                    target: "Entities",
-                    path: .relativeToRoot("Foundation/Entities"),
-                ),
-                .external(name: "MarkdownUI"),
+                Modules.Entities.project(target: .source),
+                Packages.MarkdownUI.external(),
             ],
         ),
         .example(
             name: name,
             internalDependencies: [
-                .Source,
+                .source,
             ],
             externalDependencies: [
-                .project(
-                    target: "EntitiesTesting",
-                    path: .relativeToRoot("Foundation/Entities"),
-                ),
+                Modules.Entities.project(target: .testing),
             ],
         ),
     ],

@@ -3,7 +3,7 @@ import SwiftUI
 
 struct RoundedTextFieldExampleView: View {
     var body: some View {
-        RoundedTextField(.chatTextFieldTitle, text: .constant(""))
+        RoundedTextField(.promptTextFieldTitle, text: .constant(""))
             .padding()
     }
 }

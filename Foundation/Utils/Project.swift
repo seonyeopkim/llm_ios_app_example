@@ -1,7 +1,7 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let name = "Utils"
+let name = Modules.Utils.rawValue
 
 let project = Project(
     name: name,
@@ -13,7 +13,7 @@ let project = Project(
         .tests(
             name: name,
             internalDependencies: [
-                .Source,
+                .source,
             ],
         ),
     ],

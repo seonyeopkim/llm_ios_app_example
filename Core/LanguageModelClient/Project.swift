@@ -1,7 +1,7 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let name = "LanguageModelClient"
+let name = Modules.LanguageModelClient.rawValue
 
 let project = Project(
     name: name,
@@ -10,7 +10,7 @@ let project = Project(
             name: name,
             product: .framework,
             internalDependencies: [
-                .Interface,
+                .interface,
             ],
         ),
         .interface(
@@ -21,13 +21,10 @@ let project = Project(
             name: name,
             product: .framework,
             internalDependencies: [
-                .Interface,
+                .interface,
             ],
             externalDependencies: [
-                .project(
-                    target: "Utils",
-                    path: .relativeToRoot("Foundation/Utils"),
-                ),
+                Modules.Utils.project(target: .source),
             ],
         ),
     ],
