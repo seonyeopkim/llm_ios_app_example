@@ -11,6 +11,7 @@ let project = Project(
             product: .framework,
             externalDependencies: [
                 Modules.Entities.project(target: .source),
+                Modules.Utils.project(target: .source),
                 Packages.MarkdownUI.external(),
             ],
         ),

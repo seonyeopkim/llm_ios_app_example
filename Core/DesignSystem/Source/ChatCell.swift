@@ -6,15 +6,15 @@ public struct ChatCell: View {
     public let response: String
     
     public var body: some View {
-        VStack(spacing: 30) {
+        VStack(alignment: .leading, spacing: 30) {
             HStack {
-                Spacer(minLength: 100)
+                Spacer(minLength: 60)
                 Text(self.prompt)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundStyle(Color.defaultText)
                     .padding()
                     .background(Color.defaultBackground)
-                    .foregroundStyle(Color.defaultText)
-                    .font(.system(size: 15, weight: .bold))
-                    .cornerRadius(15)
+                    .cornerRadius(20)
             }
             Markdown(self.response)
         }

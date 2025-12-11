@@ -3,7 +3,7 @@ import SwiftUI
 struct ExampleView: View {
     let examples: [Example] = [
         .ChatList,
-        .RoundedTextField,
+        .PromptTextField,
     ]
     
     var body: some View {
@@ -14,7 +14,7 @@ struct ExampleView: View {
             .navigationDestination(for: Example.self) { example in
                 switch example {
                 case .ChatList: ChatListExampleView()
-                case .RoundedTextField: RoundedTextFieldExampleView()
+                case .PromptTextField: PromptTextFieldExampleView()
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -26,7 +26,7 @@ struct ExampleView: View {
 extension ExampleView {
     enum Example: String, Identifiable {
         case ChatList
-        case RoundedTextField
+        case PromptTextField
 
         var id: String {
             self.rawValue

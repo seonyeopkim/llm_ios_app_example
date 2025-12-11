@@ -7,7 +7,7 @@ public struct ChatFeatureView: View {
         VStack(spacing: .zero) {
             Spacer()
             ChatList(self.viewModel.dataSource)
-            RoundedTextField(.promptTextFieldTitle, text: self.$viewModel.prompt)
+            PromptTextField(.promptTextFieldTitle, text: self.$viewModel.prompt)
                 .onSubmit {
                     self.viewModel.sendPrompt()
                 }
